@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showModal, closeModal } from '../../modules/modal';
+import { showModal, closeModal, inquiryModal } from '../../modules/modal';
 import { questionAddReq, questionListReq } from '../../modules/question';
 // import ReactHtmlParser from 'react-html-parser';
 import InquiryModal from '../auth/InquiryModal';
@@ -8,56 +8,77 @@ import { InquiryDataList } from '../data/InquiryData';
 import CommonTable from '../table/CommonTable';
 import InquiryTable from './InquiryTable';
 import styled from 'styled-components';
-import { Button } from '../common/InquiryStyle';
 
 const Inquires = () => {
   const Container = styled.div`
-    border: 3px solid yellow;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.4);
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 6px;
-    }
+    height: 100%;
   `;
+
+  const HeaderWrapper = styled.div`
+    display: flex;
+    width: inherit;
+    height: inherit;
+  `;
+
   const InquiryIntro = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 200px;
+    width: inherit;
+    height: inherit;
     font-size: 2.5rem;
     background: lightgray;
 
     @media screen and (max-width: 768px) {
-      height: 150px;
       font-size: 2rem;
       padding-top: 1rem;
-      flex: 0.5;
+      width: inherit;
+      height: inherit;
     }
   `;
 
   const ButtonWrapper = styled.div`
-    width: 100%;
-    padding-top: 3rem;
+    width: inherit;
+    height: inherit;
+
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding-bottom: 1.5rem;
   `;
 
+  const Button = styled.button`
+    width: calc(15vw + 6px);
+    height: calc(5vw + 6px);
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    font-family: 'Jua', sans-serif;
+    outline: none;
+    background-color: #eee;
+    cursor: pointer;
+    &:hover {
+      background-color: #ddd;
+      transition: all ease 0.4s;
+      border: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: calc(20vw + 6px);
+      height: calc(7vw + 6px);
+      font-size: 1rem;
+      margin-top: 3rem;
+    }
+  `;
   const dispatch = useDispatch();
   const [dataGroup, setDataGroup] = useState([]);
-  const { checkModal, token, questionList } = useSelector(
+  const { checkModal, token, questionList, isType } = useSelector(
     ({ modal, user, question }) => ({
       checkModal: modal.checkModal,
+      isType: modal.isType,
       token: user.token,
       questionList: question.questionList,
     }),
@@ -70,6 +91,10 @@ const Inquires = () => {
   };
   const shutModal = () => {
     dispatch(closeModal());
+  };
+
+  const openInquiryModal = () => {
+    dispatch(inquiryModal());
   };
 
   useEffect(() => {
@@ -104,7 +129,9 @@ const Inquires = () => {
   };
   return (
     <Container>
-      <InquiryIntro>문의 목록</InquiryIntro>
+      <HeaderWrapper>
+        <InquiryIntro>문의 목록</InquiryIntro>
+      </HeaderWrapper>
       <CommonTable
         headersName={[
           '글 번호',
@@ -117,14 +144,16 @@ const Inquires = () => {
       >
         <InquiryTable dataGroup={dataGroup} handleRemove={handleRemove} />
       </CommonTable>
-      {/* <ButtonWrapper>
-        <Button onClick={openModal}> 문의하기 </Button>
-      </ButtonWrapper> */}
-      <InquiryModal
-        open={checkModal}
-        close={shutModal}
-        onSubmitHand={onSubmitHand}
-      ></InquiryModal>
+      <ButtonWrapper>
+        <Button onClick={openInquiryModal}>문의하기</Button>
+      </ButtonWrapper>
+      {isType === 'inquiry' && (
+        <InquiryModal
+          open={checkModal}
+          close={shutModal}
+          onSubmitHand={onSubmitHand}
+        ></InquiryModal>
+      )}
     </Container>
   );
 };

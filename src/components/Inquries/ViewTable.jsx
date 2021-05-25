@@ -124,7 +124,7 @@ const View = ({ view }) => {
         <InquiryWrapper>
           <InquiryCollection>
             <InquiryRow>
-              <label>글 번호</label>
+              <label> 글 번호</label>
               <label>{view.id}</label>
             </InquiryRow>
             <InquiryRow>
@@ -144,7 +144,6 @@ const View = ({ view }) => {
               <label>{view.content}</label>
             </InquiryRow>
           </InquiryCollection>
-
           <ButtonWrapper>
             <ButtonWrap onClick={() => history.goBack()}>
               목록으로 돌아가기
