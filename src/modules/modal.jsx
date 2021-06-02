@@ -17,6 +17,7 @@ const ALERT_MODAL_ORDER = 'ALERT_MODAL_ORDER';
 
 const ALERT_MODAL_SONGLIST = 'ALERT_MODAL_SONGLIST';
 const ALERT_MODAL_NOFULLDATA = 'ALERT_MODAL_NOFULLDATA';
+const ALERT_MODAL_LIMITDATA = 'ALERT_MODAL_LIMITDATA';
 
 const ALERT_MODAL_ANSWER = 'ALERT_MODAL_ANSWER';
 const ALERT_MODAL_ANSWER_FALSE = 'ALERT_MODAL_ANSWER_FALSE';
@@ -43,7 +44,7 @@ export const alertOrderModal = () => ({ type: ALERT_MODAL_ORDER });
 
 export const alertSonglistModal = () => ({ type: ALERT_MODAL_SONGLIST });
 export const alertNoFullData = () => ({ type: ALERT_MODAL_NOFULLDATA });
-
+export const alertLimitData = () => ({ type: ALERT_MODAL_LIMITDATA });
 export const alertAnswerModal = () => ({ type: ALERT_MODAL_ANSWER });
 export const alertAnswerFalseModal = () => ({ type: ALERT_MODAL_ANSWER_FALSE });
 export const alertAnswerTrueModal = () => ({ type: ALERT_MODAL_ANSWER_TRUE });
@@ -151,6 +152,12 @@ export default function modal(state = initialState, action) {
         cheeckModal: false,
         alertCheck: true,
         isType: 'noFullData',
+      };
+    case ALERT_MODAL_LIMITDATA:
+      return {
+        checkModal: false,
+        alertCheck: true,
+        isType: 'limitData',
       };
     case ALERT_MODAL_ANSWER:
       return {

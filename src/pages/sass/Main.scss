@@ -1,13 +1,22 @@
 $small: 'screen and (max-width:1500px)';
 $medium: 'screen and (max-width:1800px)';
 body {
-    overflow: hidden;
-    .container {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 90vh;
-        .wrapperContent {
+  overflow: hidden;
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 90vh;
+    .wrapperContent {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      .mainWrapper {
+        flex: 1;
+        .sectionWrapper {
+          display: flex;
+          .cdCase {
+            position: absolute;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -267,79 +276,294 @@ body {
                         }
                     }
                 }
+              }
             }
-        }
-    }
-    .wrapBtn {
-        @media screen and (max-width: 768px) {
-            bottom: 15vh;
-        }
-        .btn {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-bottom: 1rem;
-            .fingerBtn {
-                z-index: 999;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                margin-bottom: -1rem;
+            .coverImg {
+              flex: 1;
+              position: absolute;
+              top: -12%;
+              width: 400px;
+              height: 400px;
+              box-shadow: 1px 3px 2px 3px rgba(0, 1, 1, 1);
+              img {
+                width: inherit;
+                height: inherit;
+              }
+              .card {
+                width: 300px;
+                height: 300px;
+                background-color: black;
+              }
+              @media #{$small} {
+                top: -15%;
+                width: 270px;
+                height: 270px;
+              }
+              @media screen and (min-width: 1500px) and (max-width: 1800px) {
+                top: 10%;
+                left: -15%;
+                width: 350px;
+                height: 350px;
+              }
+            }
+            .disk {
+              position: absolute;
+              top: -10%;
+              width: 370px;
+              height: 370px;
+              border-radius: 50%;
+              background: linear-gradient(120deg, #00498c, #5e7e9b, #0080ff);
+              box-shadow: 3px 3px 10px rgba(0, 0, 3, 0.5);
+              transition: left 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              @media #{$small} {
+                top: -10%;
+                width: 240px;
+                height: 240px;
+              }
+              @media screen and (min-width: 1500px) and (max-width: 1800px) {
+                top: 15%;
+                left: -20%;
+                width: 320px;
+                height: 320px;
+              }
+              .innerDisk {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100px;
+                height: 100px;
+                background-color: #0473a4;
+                border-radius: 50%;
                 @media #{$small} {
-                    font-size: 2em;
-                    padding: 0 1.5rem;
+                  width: 50px;
+                  height: 50px;
                 }
-            }
-            .skipBtn {
-                display: flex;
-                justify-content: flex-end;
-                margin-right: 1rem;
-                margin-bottom: 2.5rem;
-                button {
-                    display: flex;
-                    align-items: center;
-                    &:hover {
-                        color: rgb(163, 158, 158);
-                    }
+                @media screen and (min-width: 1500px) and (max-width: 1800px) {
+                  width: 90px;
+                  height: 90px;
                 }
+              }
             }
-            button {
-                background: transparent;
-                color: lightgray;
-                height: 60px;
-                font-family: 'Jua', sans-serif;
-                font-size: 2.5rem;
-                padding: 0 4rem;
+          }
+          .movingImg {
+            position: absolute;
+            flex: 1;
+            top: 15%;
+            left: 38%;
+            transform: translate(-50%, -50%);
+            width: inherit;
+            height: inherit;
+            visibility: hidden;
+            opacity: 0;
+            transition: left 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: rotate(90deg);
+            .title {
+              transform: rotate(270deg);
+              border: 3px solid white;
+              height: 30%;
+            }
+            .textWrapper {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              transform: rotate(270deg);
+              padding-left: 2rem;
+              border: none;
+              background: transparent;
+              @media #{$small} {
+                padding-top: 1rem;
+                padding-right: 1rem;
+                background-color: rgba(0, 0, 0, 0.5);
+                box-shadow: 1px 1px 1px 1px black;
+                border-radius: 20px;
+              }
+              h1 {
+                color: #fff;
+                font-size: 80px;
+                width: 35rem;
+                padding-bottom: 2.5rem;
+                text-align: center;
+                font-family: 'Lato', sans-serif;
+                @media #{$small} {
+                  font-size: 32px;
+                  padding-right: 1rem;
+                  padding-left: 1rem;
+                }
+              }
+              .start,
+              .share {
                 cursor: pointer;
-                border: none;
-                outline: none;
-                &:hover {
-                    color: rgb(163, 158, 158);
+                width: calc(11vw + 6px);
+                height: calc(3vw + 6px);
+                color: #000;
+                background-color: #fff;
+                border-radius: 20px;
+                margin: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                font-family: 'Jua', sans-serif;
+                font-size: 30px;
+                ::after {
+                  content: attr(alt);
+                  width: 20vw;
+                  height: 8vw;
+                  background-color: #191919;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
                 }
                 @media #{$small} {
-                    font-size: 1.6em;
-                    padding: 0 1.5rem;
+                  width: 120px;
+                  height: 50px;
+                  font-size: 15px;
                 }
+              }
             }
+            @media #{$medium} {
+              top: 10%;
+              left: 50%;
+              width: 650px;
+              height: 450px;
+              transform: translate(-50%, -50%);
+              transform: rotate(90deg);
+            }
+            @media #{$small} {
+              top: 25%;
+              left: 12%;
+              width: 450px;
+              height: 350px;
+              transform: translate(-50%, -50%);
+              transform: rotate(90deg);
+              padding: 2rem;
+            }
+            &.active {
+              visibility: visible;
+              opacity: 1;
+              transition: left 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              animation: fadeIn 2s ease-in-out;
+              .card {
+                display: flex;
+                flex-direction: column;
+                left: 30%;
+                width: inherit;
+                height: inherit;
+                transition-delay: 1.5s;
+                transition: left 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                animation: fadeIn 2s ease-in-out;
+                @media #{$medium} {
+                  width: 650px;
+                  height: 450px;
+                }
+                @media #{$small} {
+                  width: 450px;
+                  height: 350px;
+                }
+                img {
+                  border-radius: 10px;
+                  width: 1100px;
+                  height: 600px;
+                  box-shadow: 1px 1px 15px rgba(0, 0, 1, 1);
+                  animation: fadeIn 2s ease-in-out;
+                  opacity: 1;
+                  transform: rotate(270deg);
+                  @media #{$medium} {
+                    width: 800px;
+                    height: 450px;
+                  }
+                  @media #{$small} {
+                    width: 450px;
+                    height: 350px;
+                    top: 10%;
+                    left: -10%;
+                  }
+                }
+              }
+              @media #{$small} {
+                .disk {
+                  left: 35%;
+                  transition-delay: 0.5s;
+                }
+              }
+            }
+          }
         }
+      }
     }
+  }
+  .wrapBtn {
+    @media screen and (max-width: 768px) {
+      bottom: 15vh;
+    }
+    .btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      .fingerBtn {
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: -1rem;
+        @media #{$small} {
+          font-size: 2em;
+          padding: 0 1.5rem;
+        }
+      }
+      .skipBtn {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 1rem;
+        margin-bottom: 2.5rem;
+        button {
+          display: flex;
+          align-items: center;
+          &:hover {
+            color: rgb(163, 158, 158);
+          }
+        }
+      }
+      button {
+        background: transparent;
+        color: lightgray;
+        height: 60px;
+        font-family: 'Jua', sans-serif;
+        font-size: 2.5rem;
+        padding: 0 4rem;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        &:hover {
+          color: rgb(163, 158, 158);
+        }
+        @media #{$small} {
+          font-size: 1.6em;
+          padding: 0 1.5rem;
+        }
+      }
+    }
+  }
 }
 
 @keyframes rotation {
-    0% {
-        transform: rotate(0);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

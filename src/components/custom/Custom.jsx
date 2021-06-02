@@ -13,6 +13,7 @@ import {
   closeModal,
   alertSonglistModal,
   alertNoFullData,
+  alertLimitData,
 } from '../../modules/modal';
 import styled from 'styled-components';
 import {
@@ -92,6 +93,10 @@ const Custom = () => {
     dispatch(alertNoFullData());
   };
 
+  const openLimitDataModal = () => {
+    dispatch(alertLimitData());
+  };
+
   const currentSong = (e) => {
     setNowSong(e.target.value);
   };
@@ -99,6 +104,9 @@ const Custom = () => {
   const handleClick = () => {
     if (nowSong.length === 0) {
       openSongListModal();
+      return;
+    } else if (songList.length === 5) {
+      openLimitDataModal();
       return;
     }
     setSongList([...songList, nowSong]);
@@ -110,7 +118,7 @@ const Custom = () => {
     );
     setSongList(newSongList);
     if (newSongList) {
-      for (let i = 0; i <= sessionStorage.length; i++) {
+      for (let i = 0; i <= sessionStorage.length + 1; i++) {
         sessionStorage.removeItem(`songList${i}`);
       }
       for (let i = 0; i < newSongList.length; i++) {
@@ -420,6 +428,13 @@ const Custom = () => {
           openHandle={alertCheck}
           closeHandle={shutModal}
           comment={'모두 입력되어야 등록이 가능합니다'}
+        />
+      )}
+      {isType === 'limitData' && (
+        <AlertModal
+          openHandle={alertCheck}
+          closeHandle={shutModal}
+          comment={'곡은 5개까지만 등록 가능합니다'}
         />
       )}
     </Container>

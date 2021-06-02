@@ -9,6 +9,7 @@ import { alertLoginModal } from '../../modules/modal';
 import { GrFormClose } from 'react-icons/gr';
 
 const LoginWrapper = styled.div`
+  z-index: 2;
   display: flex;
   flex-direction: column;
 

@@ -12,6 +12,7 @@ import { alertRegisterModal } from '../../modules/modal';
 import { GrFormClose } from 'react-icons/gr';
 
 const RegisterWrapper = styled.div`
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
